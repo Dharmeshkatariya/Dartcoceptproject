@@ -15,7 +15,8 @@ class _CalculatorAppState extends State<CalculatorApp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
+        body: Obx(
+      () => Column(
         children: [
           Expanded(
             child: Container(
@@ -200,7 +201,7 @@ class _CalculatorAppState extends State<CalculatorApp> {
           ),
         ],
       ),
-    );
+    ));
   }
 
   Widget _containerData(

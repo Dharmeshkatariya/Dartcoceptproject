@@ -37,7 +37,9 @@ class CalculatorController extends GetxController {
         opp += outputResult.value[i];
       }
     }
-    outputResult.value = operation(num1, num2, opp);
+    if (num1.value.isNotEmpty && num2.value.isNotEmpty) {
+      outputResult.value = operation(num1, num2, opp);
+    }
   }
 
   String operation(RxString num1, RxString num2, opp) {
