@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:revisionproject/common.dart';
+import 'package:revisionproject/controller/calculator_controller.dart';
 
 class CalculatorPage extends StatefulWidget {
   const CalculatorPage({super.key});
@@ -9,12 +11,13 @@ class CalculatorPage extends StatefulWidget {
 }
 
 class _CalculatorPageState extends State<CalculatorPage> {
-  String outputResult = "0";
+  final _calController = Get.put(CalculatorController());
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
+        body: Obx(
+      () => Column(
         children: [
           Expanded(
             child: Container(
@@ -22,7 +25,7 @@ class _CalculatorPageState extends State<CalculatorPage> {
               padding: const EdgeInsets.all(12),
               color: Colors.blueGrey,
               child: Text(
-                outputResult,
+                _calController.outputResult.value,
                 style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 45,
@@ -49,45 +52,7 @@ class _CalculatorPageState extends State<CalculatorPage> {
           ),
         ],
       ),
-    );
-  }
-
-  _numberPress(String num) {
-    outputResult += num;
-    setState(() {});
-  }
-
-  _clearPress() {
-    if (outputResult.isNotEmpty) {
-      outputResult = outputResult.substring(0, outputResult.length - 1);
-    }
-    setState(() {});
-  }
-
-  bool _isNumeric(String str) {
-    return double.tryParse(str) != null;
-  }
-
-  _separate() {
-    String num1 = "";
-    String num2 = "";
-    String opp = "";
-
-    bool isNumber = true;
-    for (int i = 0; i < outputResult.length; i++) {
-      if (_isNumeric(outputResult[i])) {
-        if (isNumber) {
-          num1 += outputResult[i];
-        } else {
-          num2 += outputResult[i];
-        }
-      } else {
-        isNumber = false;
-        opp += outputResult[i];
-      }
-    }
-    outputResult = Common.operation(num1, num2, opp);
-    setState(() {});
+    ));
   }
 
   Widget _row0() {
@@ -96,25 +61,25 @@ class _CalculatorPageState extends State<CalculatorPage> {
         _containerData(
             text: "0",
             onTap: () {
-              _numberPress('0');
-              _separate();
+              _calController.numberPress("0");
+              _calController.separate();
             }),
         _containerData(
             text: ".",
             onTap: () {
-              _numberPress(".");
+              _calController.numberPress(".");
             }),
         _containerData(
             text: "=",
             color: Colors.teal,
             onTap: () {
-              _separate();
+              _calController.separate();
             }),
         _containerData(
             text: "+",
             color: Colors.orange.shade400,
             onTap: () {
-              _numberPress("+");
+              _calController.numberPress("+");
             }),
       ],
     );
@@ -126,23 +91,23 @@ class _CalculatorPageState extends State<CalculatorPage> {
         _containerData(
             text: "1",
             onTap: () {
-              _numberPress("1");
+              _calController.numberPress("1");
             }),
         _containerData(
             text: "2",
             onTap: () {
-              _numberPress("2");
+              _calController.numberPress("2");
             }),
         _containerData(
             text: "3",
             onTap: () {
-              _numberPress("3");
+              _calController.numberPress("3");
             }),
         _containerData(
             text: "-",
             color: Colors.orange.shade400,
             onTap: () {
-              _numberPress("-");
+              _calController.numberPress("-");
             }),
       ],
     );
@@ -154,23 +119,23 @@ class _CalculatorPageState extends State<CalculatorPage> {
         _containerData(
             text: "4",
             onTap: () {
-              _numberPress("4");
+              _calController.numberPress("4");
             }),
         _containerData(
             text: "5",
             onTap: () {
-              _numberPress("5");
+              _calController.numberPress("5");
             }),
         _containerData(
             text: "6",
             onTap: () {
-              _numberPress("6");
+              _calController.numberPress("6");
             }),
         _containerData(
             text: "*",
             color: Colors.orange.shade400,
             onTap: () {
-              _numberPress("*");
+              _calController.numberPress("*");
             }),
       ],
     );
@@ -182,23 +147,23 @@ class _CalculatorPageState extends State<CalculatorPage> {
         _containerData(
             text: "7",
             onTap: () {
-              _numberPress("7");
+              _calController.numberPress("7");
             }),
         _containerData(
             text: "8",
             onTap: () {
-              _numberPress("8");
+              _calController.numberPress("8");
             }),
         _containerData(
             text: "9",
             onTap: () {
-              _numberPress("9");
+              _calController.numberPress("9");
             }),
         _containerData(
             text: "/",
             color: Colors.orange.shade400,
             onTap: () {
-              _numberPress("/");
+              _calController.numberPress("/");
             }),
       ],
     );
@@ -211,19 +176,18 @@ class _CalculatorPageState extends State<CalculatorPage> {
             text: "Ac",
             color: Colors.red,
             onTap: () {
-              outputResult = "0";
-              setState(() {});
+              _calController.outputResult.value = "0";
             }),
         _containerData(
             text: "C",
             color: Colors.orange.shade400,
             onTap: () {
-              _clearPress();
+              _calController.clearPress();
             }),
         _containerData(
             text: "%",
             onTap: () {
-              _numberPress("%");
+              _calController.numberPress("%");
             }),
         _containerData(text: "", color: Colors.orange.shade400),
       ],

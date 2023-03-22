@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:revisionproject/common.dart';
+import 'package:get/get.dart';
+import 'package:revisionproject/controller/result_controller.dart';
 
 class StudentResult extends StatefulWidget {
   const StudentResult({super.key});
@@ -9,18 +10,13 @@ class StudentResult extends StatefulWidget {
 }
 
 class _StudentResultState extends State<StudentResult> {
-  final _mathController = TextEditingController();
-  final _chemController = TextEditingController();
-  final _phyController = TextEditingController();
-
-  double avr = 0.0;
-  String grade = "";
-  bool isPass = true;
+  final _resultController = Get.put(ResultController());
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
+        body: Obx(
+      () => SingleChildScrollView(
         child: Container(
           width: double.infinity,
           margin: const EdgeInsets.all(15),
@@ -52,7 +48,7 @@ class _StudentResultState extends State<StudentResult> {
                 height: 25,
               ),
               _text(text: "Student Name : Dharmesh "),
-              const  SizedBox(
+              const SizedBox(
                 height: 25,
               ),
               Row(
@@ -82,11 +78,11 @@ class _StudentResultState extends State<StudentResult> {
                     child: Column(
                       children: [
                         _text(text: "Mathematics"),
-                        const  SizedBox(
+                        const SizedBox(
                           height: 35,
                         ),
                         _text(text: "Chemistry"),
-                        const  SizedBox(
+                        const SizedBox(
                           height: 35,
                         ),
                         _text(text: "physics"),
@@ -112,47 +108,49 @@ class _StudentResultState extends State<StudentResult> {
                   Expanded(
                     child: Column(
                       children: [
-                        _textFieldData(controller: _mathController),
-                        _textFieldData(controller: _chemController),
-                        _textFieldData(controller: _phyController),
+                        _textFieldData(
+                            controller: _resultController.mathController),
+                        _textFieldData(
+                            controller: _resultController.chemController),
+                        _textFieldData(
+                            controller: _resultController.phyController),
                       ],
                     ),
                   )
                 ],
               ),
               _text(
-                  text: "Result :- ${isPass ? 'pass' : 'fail'}",
-                  color: isPass ? Colors.blueAccent : Colors.red),
+                  text:
+                      "Result :- ${_resultController.isPass.value ? 'pass' : 'fail'}",
+                  color: _resultController.isPass.value
+                      ? Colors.blueAccent
+                      : Colors.red),
               const SizedBox(
                 height: 25,
               ),
-              _text(text: "Grade :- $grade"),
+              _text(text: "Grade :- ${_resultController.grade.value}"),
               const SizedBox(
                 height: 25,
               ),
-              _text(text: "Perchantage :- $avr%"),
+              _text(text: "Perchantage :- ${_resultController.avg.value}%"),
               const SizedBox(
                 height: 25,
               ),
               _text(
-                  text: isPass ? 'congratulation' : 'sorry',
-                  color: isPass ? Colors.blueAccent : Colors.red),
+                  text: _resultController.isPass.value
+                      ? 'congratulation'
+                      : 'sorry',
+                  color: _resultController.isPass.value
+                      ? Colors.blueAccent
+                      : Colors.red),
               const SizedBox(
                 height: 25,
               ),
               GestureDetector(
                 onTap: () {
-                  avr = Common.average(
-                      double.parse(_mathController.text),
-                      double.parse(_chemController.text),
-                      double.parse(_phyController.text));
-                  isPass = Common.passing(
-                      int.parse(_mathController.text),
-                      int.parse(_chemController.text),
-                      int.parse(_phyController.text));
-                  grade = Common.grading(avr);
-
-                  setState(() {});
+                  _resultController.average();
+                  _resultController.passing();
+                  _resultController.grading();
                 },
                 child: Container(
                   alignment: Alignment.center,
@@ -170,7 +168,7 @@ class _StudentResultState extends State<StudentResult> {
           ),
         ),
       ),
-    );
+    ));
   }
 
   Widget _textFieldData({TextEditingController? controller}) {

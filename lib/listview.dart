@@ -15,7 +15,6 @@ class _ListViewProfileState extends State<ListViewProfile> {
   @override
   void initState() {
     // TODO: implement initState
-
     uList = Common().userData();
     super.initState();
   }
@@ -27,7 +26,7 @@ class _ListViewProfileState extends State<ListViewProfile> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.red.shade700,
-        title:const Text(
+        title: const Text(
           "List Of User",
           style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
         ),
@@ -45,8 +44,8 @@ class _ListViewProfileState extends State<ListViewProfile> {
     User user = uList[index];
 
     return Container(
-        margin:const EdgeInsets.symmetric(vertical: 15),
-        padding:const EdgeInsets.symmetric(vertical: 10, horizontal: 5),
+        margin: const EdgeInsets.symmetric(vertical: 15),
+        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 5),
         width: double.infinity,
         decoration: BoxDecoration(
           color: Colors.blueGrey,
@@ -58,37 +57,41 @@ class _ListViewProfileState extends State<ListViewProfile> {
             ClipRRect(
                 borderRadius: BorderRadius.circular(50),
                 child: GestureDetector(
-                  onTap: (){
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => BackProfile(user: user,)),
-                    );
-                  },
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => BackProfile(
+                                  user: user,
+                                )),
+                      );
+                    },
                     child: Image.asset(
-                  user.image,
-                  height: 60,
-                  width: 60,
-                  fit: BoxFit.cover,
-                ))),
-          const SizedBox(width: 20.0,),
-           Expanded(
-             child:  Column(
-               crossAxisAlignment: CrossAxisAlignment.start,
-               children: [
-                 Text(
-                   "Name : ${user.name}",
-
-                   style: const TextStyle(
-                       fontWeight: FontWeight.bold, color: Colors.white),
-                 ),
-                 Text(
-                   "Email: ${user.email}",
-                   overflow: TextOverflow.ellipsis,
-                   style:const TextStyle(color: Colors.white),
-                 ),
-               ],
-             ),
-           ),
+                      user.image,
+                      height: 60,
+                      width: 60,
+                      fit: BoxFit.cover,
+                    ))),
+            const SizedBox(
+              width: 20.0,
+            ),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Name : ${user.name}",
+                    style: const TextStyle(
+                        fontWeight: FontWeight.bold, color: Colors.white),
+                  ),
+                  Text(
+                    "Email: ${user.email}",
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(color: Colors.white),
+                  ),
+                ],
+              ),
+            ),
           ],
         ));
   }

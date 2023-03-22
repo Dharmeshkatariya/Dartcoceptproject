@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:revisionproject/common.dart';
+import 'package:get/get.dart';
 import 'package:revisionproject/evenodd.dart';
 import 'package:revisionproject/result.dart';
 import 'package:revisionproject/string.dart';
@@ -19,119 +19,78 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    _results();
-    super.initState();
-  }
-
-  _results() async{
-    String reuslt = await Common().getResult();
-    print('--------------============$reuslt');
-  }
+class MyHomePage extends StatelessWidget {
+  const MyHomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
         child: Container(
-          padding:const EdgeInsets.symmetric(horizontal: 20),
+          padding: const EdgeInsets.symmetric(horizontal: 20),
           child: SingleChildScrollView(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const  SizedBox(
+                const SizedBox(
                   height: 65,
                 ),
                 _getwidget(
                     text: "Even/Odd",
                     onTab: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) =>const EvenOddProfile()),
-                      );
+                      Get.to( EvenOddProfile());
                     }),
                 _getwidget(
                     text: "String",
                     onTab: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) =>const StringProfile()),
-                      );
+                      Get.to( StrScreenPage());
                     }),
                 _getwidget(
                     text: "Result",
                     onTab: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) =>const StudentResult()),
-                      );
+                      Get.to(const StudentResult());
                     }),
                 _getwidget(
                     text: "Calculator",
                     onTab: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) =>const CalculatorPage()),
-                      );
+                      Get.to(const CalculatorPage());
                     }),
-                _getwidget(text: "Listview",onTab: (){
-
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const ListViewProfile()),
-                  );
-                }),
-                _getwidget(text: "GridView",onTab: (){
-
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const GridViewProfile()),
-                  );
-                }),
+                _getwidget(
+                    text: "Listview",
+                    onTab: () {
+                      Get.to(const ListViewProfile());
+                    }),
+                _getwidget(
+                    text: "GridView",
+                    onTab: () {
+                      Get.to(const GridViewProfile());
+                    }),
                 _getwidget(
                     text: "Login",
                     onTab: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => const LoginPage()),
-                      );
+                      Get.to(const LoginPage());
                     }),
-                _getwidget(text: "String 2",onTab: (){
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const SecondString()),
-                  );
-                }),
-                _getwidget(text: "Calculator 2",onTab: (){
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const CalculatorApp()),
-                  );
-                }),
+                _getwidget(
+                    text: "String 2",
+                    onTab: () {
+                      Get.to(const SecondString());
+                    }),
+                _getwidget(
+                    text: "Calculator 2",
+                    onTab: () {
+                      Get.to(const CalculatorApp());
+                    }),
               ],
             ),
           ),
@@ -150,8 +109,8 @@ class _MyHomePageState extends State<MyHomePage> {
           color: Colors.red[500],
           borderRadius: BorderRadius.circular(25),
         ),
-        margin:const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-        padding:const EdgeInsets.symmetric(horizontal: 20, vertical: 13),
+        margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 13),
         child: Text(
           text,
           style: const TextStyle(

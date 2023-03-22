@@ -23,40 +23,6 @@ class Common {
     }
   }
 
-  static double average(double a, double b, double c) {
-    double result = (a + b + c) / 3;
-    return result;
-  }
-
-
-  static bool passing(int a, int b, int c) {
-    if (a > 35 && b > 35 && c > 35) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
-  static String grading(double avr) {
-    if (avr > 91 && avr <= 100) {
-      return "A+";
-    } else if (avr > 81 && avr < 90) {
-      return "A";
-    } else if (avr > 71 && avr < 80) {
-      return "B+";
-    } else if (avr > 61 && avr < 70) {
-      return "B";
-    } else if (avr > 51 && avr < 60) {
-      return "C+";
-    } else if (avr > 41 && avr < 50) {
-      return "C";
-    } else if (avr > 36 && avr < 40) {
-      return "D+";
-    } else {
-      return "F";
-    }
-  }
-
   List<User> userList = [];
 
 

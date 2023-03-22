@@ -1,6 +1,4 @@
-class User{
-
-
+class User {
   User();
 
   late String name;

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:revisionproject/controller/calculator_controller.dart';
 
 class CalculatorApp extends StatefulWidget {
   const CalculatorApp({super.key});
@@ -8,8 +10,7 @@ class CalculatorApp extends StatefulWidget {
 }
 
 class _CalculatorAppState extends State<CalculatorApp> {
-  String outputResult = "0";
-  bool isDisable = false;
+  final _calculatorController = Get.put(CalculatorController());
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +24,7 @@ class _CalculatorAppState extends State<CalculatorApp> {
               color: Colors.blueGrey,
               padding: const EdgeInsets.only(left: 10),
               child: Text(
-                outputResult,
+                _calculatorController.outputResult.value,
                 style: const TextStyle(
                     fontSize: 50,
                     fontWeight: FontWeight.bold,
@@ -45,29 +46,29 @@ class _CalculatorAppState extends State<CalculatorApp> {
                             text: "Ac",
                             color: Colors.red,
                             onTap: () {
-                              outputResult = "0";
+                              _calculatorController.outputResult.value = "0";
                               setState(() {});
                             }),
                         _containerData(
                             text: "C",
-
-                            color:  Colors.blue.shade300,
+                            color: Colors.blue.shade300,
                             onTap: () {
-                              _clearPress();
+                              _calculatorController.clearPress();
                             }),
                         _containerData(
                             text: "%",
                             onTap: () {
-                              _numPress("%");
+                              _calculatorController.numberPress("%");
                             }),
                         _containerData(
                             text: "",
-                            color: isDisable? Colors.blueGrey: Colors.orange.shade400,
+                            color: _calculatorController.isDisable.value
+                                ? Colors.blueGrey
+                                : Colors.orange.shade400,
                             onTap: () {
-                              if(!isDisable){
-                                isDisable=true;
-                                _numPress("");
-
+                              if (!_calculatorController.isDisable.value) {
+                                _calculatorController.isDisable.value = true;
+                                _calculatorController.numberPress("");
                               }
                             }),
                       ],
@@ -77,26 +78,28 @@ class _CalculatorAppState extends State<CalculatorApp> {
                         _containerData(
                             text: "7",
                             onTap: () {
-                              _numPress("7");
+                              _calculatorController.numberPress("7");
                             }),
                         _containerData(
                             text: "8",
                             onTap: () {
-                              _numPress("8");
+                              _calculatorController.numberPress("8");
                             }),
                         _containerData(
                             text: "9",
                             onTap: () {
-                              _numPress("9");
+                              _calculatorController.numberPress("9");
                             }),
                         _containerData(
                             text: "/",
-                            color: isDisable? Colors.blueGrey: Colors.orange.shade400,
-                            onTap: ()  {
-                             if(!isDisable){
-                               isDisable =true;
-                               _numPress("/");
-                             }
+                            color: _calculatorController.isDisable.value
+                                ? Colors.blueGrey
+                                : Colors.orange.shade400,
+                            onTap: () {
+                              if (!_calculatorController.isDisable.value) {
+                                _calculatorController.isDisable.value = true;
+                                _calculatorController.numberPress("/");
+                              }
                             }),
                       ],
                     ),
@@ -105,27 +108,28 @@ class _CalculatorAppState extends State<CalculatorApp> {
                         _containerData(
                             text: "4",
                             onTap: () {
-                              _numPress("4");
+                              _calculatorController.numberPress("4");
                             }),
                         _containerData(
                             text: "5",
                             onTap: () {
-                              _numPress("5");
+                              _calculatorController.numberPress("5");
                             }),
                         _containerData(
                             text: "6",
                             onTap: () {
-                              _numPress("6");
+                              _calculatorController.numberPress("6");
                             }),
                         _containerData(
                             text: "X",
-                            color: isDisable? Colors.blueGrey: Colors.orange.shade400,
+                            color: _calculatorController.isDisable.value
+                                ? Colors.blueGrey
+                                : Colors.orange.shade400,
                             onTap: () {
-                              if(!isDisable){
-                                isDisable=true;
-                                _numPress("*");
+                              if (!_calculatorController.isDisable.value) {
+                                _calculatorController.isDisable.value = true;
+                                _calculatorController.numberPress("*");
                               }
-
                             }),
                       ],
                     ),
@@ -134,27 +138,28 @@ class _CalculatorAppState extends State<CalculatorApp> {
                         _containerData(
                             text: "1",
                             onTap: () {
-                              _numPress("1");
+                              _calculatorController.numberPress("1");
                             }),
                         _containerData(
                             text: "2",
                             onTap: () {
-                              _numPress("2");
+                              _calculatorController.numberPress("2");
                             }),
                         _containerData(
                             text: "3",
                             onTap: () {
-                              _numPress("3");
+                              _calculatorController.numberPress("3");
                             }),
                         _containerData(
                             text: "-",
-                            color: isDisable? Colors.blueGrey: Colors.orange.shade400,
+                            color: _calculatorController.isDisable.value
+                                ? Colors.blueGrey
+                                : Colors.orange.shade400,
                             onTap: () {
-                              if(!isDisable) {
-                                isDisable = true;
-                                _numPress("-");
+                              if (!_calculatorController.isDisable.value) {
+                                _calculatorController.isDisable.value = true;
+                                _calculatorController.numberPress("-");
                               }
-
                             }),
                       ],
                     ),
@@ -163,27 +168,29 @@ class _CalculatorAppState extends State<CalculatorApp> {
                         _containerData(
                             text: "0",
                             onTap: () {
-                              _numPress("0");
+                              _calculatorController.numberPress("0");
                             }),
                         _containerData(
                             text: ".",
                             onTap: () {
-                              _numPress(".");
+                              _calculatorController.numberPress(".");
                             }),
                         _containerData(
                             text: "=",
                             color: Colors.cyanAccent,
                             onTap: () {
-                              isDisable = false;
-                            _separate();
+                              _calculatorController.isDisable.value = false;
+                              _calculatorController.separate();
                             }),
                         _containerData(
                             text: "+",
-                            color: isDisable? Colors.blueGrey: Colors.orange.shade400,
+                            color: _calculatorController.isDisable.value
+                                ? Colors.blueGrey
+                                : Colors.orange.shade400,
                             onTap: () {
-                              if(!isDisable){
-                                isDisable=true;
-                                _numPress("+");
+                              if (!_calculatorController.isDisable.value) {
+                                _calculatorController.isDisable.value = true;
+                                _calculatorController.numberPress("+");
                               }
                             }),
                       ],
@@ -194,64 +201,6 @@ class _CalculatorAppState extends State<CalculatorApp> {
         ],
       ),
     );
-  }
-
-  _clearPress() {
-    if (outputResult.length > 0 && outputResult.isNotEmpty)
-      outputResult = outputResult.substring(0, outputResult.length - 1);
-    setState(() {});
-  }
-
-  _numPress(String num) {
-    outputResult += num;
-    setState(() {});
-  }
-
-  bool isNumeric(String str) {
-    if (str == null) {
-      return false;
-    }
-    return double.tryParse(str) != null;
-  }
-
-  _separate() {
-    String num1 = "";
-    String num2 = "";
-    String opp = "";
-    bool isNum = true;
-
-    for (int i = 0; i < outputResult.length; i++) {
-      if (isNumeric(outputResult[i])) {
-        if (isNum) {
-          num1 += outputResult[i];
-        } else {
-          num2 += outputResult[i];
-        }
-      } else {
-        isNum = false;
-        opp += outputResult[i];
-      }
-    }
-    if(num1.isNotEmpty && num2.isNotEmpty){
-      _operation(num1, num2, opp);
-    }
-
-  }
-
-  _operation(String num1,String num2,String opp){
-
-    if( opp == "+"){
-      outputResult = (int.parse(num1) + int.parse(num2)).toString();
-    }else if(opp == "-"){
-      outputResult = (int.parse(num1) - int.parse(num2)).toString();
-    }else if(opp == "*"){
-      outputResult = (int.parse(num1) * int.parse(num2)).toString();
-    }else if(opp =="/"){
-      outputResult = (int.parse(num1) / int.parse(num2)).toString();
-    }
-    setState(() {
-
-    });
   }
 
   Widget _containerData(
