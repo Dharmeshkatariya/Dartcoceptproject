@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:revisionproject/userdata.dart';
+import 'package:revisionproject/modal/userdata.dart';
 
 class Common {
 

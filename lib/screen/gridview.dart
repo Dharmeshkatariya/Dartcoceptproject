@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:revisionproject/common.dart';
-import 'package:revisionproject/userdata.dart';
+import 'package:revisionproject/modal/userdata.dart';
 
 import 'backprofile.dart';
 

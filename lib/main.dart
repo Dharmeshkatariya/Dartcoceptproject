@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:revisionproject/evenodd.dart';
-import 'package:revisionproject/result.dart';
-import 'package:revisionproject/string.dart';
-import 'package:revisionproject/string2.dart';
-import 'calculator.dart';
-import 'calculator2.dart';
-import 'gridview.dart';
-import 'listview.dart';
-import 'loginpage.dart';
+import 'package:revisionproject/screen/evenodd.dart';
+import 'package:revisionproject/screen/result.dart';
+import 'package:revisionproject/screen/string.dart';
+import 'package:revisionproject/screen/string2.dart';
+import 'screen/calculator.dart';
+import 'screen/calculator2.dart';
+import 'screen/gridview.dart';
+import 'screen/listview.dart';
+import 'screen/loginpage.dart';
 
 void main() {
   runApp(const MyApp());

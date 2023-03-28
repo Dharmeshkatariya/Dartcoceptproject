@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:revisionproject/userdata.dart';
+import 'package:revisionproject/modal/userdata.dart';
 
 class BackProfile extends StatefulWidget{
   const BackProfile({super.key, required this.user});
