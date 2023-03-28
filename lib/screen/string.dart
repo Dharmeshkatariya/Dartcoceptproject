@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:revisionproject/controller/string_controller.dart';
 
-class StrScreenPage extends StatelessWidget {
+class StrScreenPage extends GetView<StringController> {
   StrScreenPage({Key? key}) : super(key: key);
 
-  final _stringController = Get.put(StringController());
 
   @override
   Widget build(BuildContext context) {
@@ -25,12 +24,12 @@ class StrScreenPage extends StatelessWidget {
               width: double.infinity,
               child: Column(
                 children: [
-                  _textField(controller: _stringController.s1Controller),
+                  _textField(controller: controller.s1Controller),
                   const SizedBox(
                     height: 20,
                   ),
                   Text(
-                    "Result : ${_stringController.outputResult}",
+                    "Result : ${controller.outputResult}",
                     style: const TextStyle(
                         fontSize: 17,
                         fontWeight: FontWeight.bold,
@@ -39,31 +38,31 @@ class StrScreenPage extends StatelessWidget {
                   _containerData(
                       text: "Comma Separate",
                       onTab: () {
-                        _stringController.commaSeparate();
+                        controller.commaSeparate();
                       }),
                   _containerData(
                       text: "Real Input",
                       onTab: () {
-                        _stringController.realInput();
+                        controller.realInput();
                       }),
                   _containerData(
                       text: "First Five Char",
                       onTab: () {
-                        _stringController.firstChar();
+                        controller.firstChar();
                       }),
                   _containerData(
                       text: "Last Five Char",
                       onTab: () {
-                        _stringController.lastChar();
+                        controller.lastChar();
                       }),
                   Visibility(
-                      visible: _stringController.isVisible.value,
+                      visible: controller.isVisible.value,
                       child: _textField(
-                          controller: _stringController.s2Controller)),
+                          controller: controller.s2Controller)),
                   _containerData(
                       text: "Add 2 String",
                       onTab: () {
-                        _stringController.addString();
+                        controller.addString();
                       }),
                 ],
               ),
@@ -112,7 +111,7 @@ class StrScreenPage extends StatelessWidget {
 
   @override
   void dispose() {
-    _stringController.s1Controller.dispose();
-    _stringController.s2Controller.dispose();
+    controller.s1Controller.dispose();
+    controller.s2Controller.dispose();
   }
 }

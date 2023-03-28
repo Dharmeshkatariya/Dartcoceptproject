@@ -2,77 +2,72 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:revisionproject/controller/string_controller.dart';
 
-class SecondString extends StatefulWidget {
+class SecondString extends GetView<StringController> {
   const SecondString({super.key});
-
-  @override
-  State<SecondString> createState() => _SecondStringState();
-}
-
-class _SecondStringState extends State<SecondString> {
-  final _strController = Get.put(StringController());
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.red[800],
-        title: const Text("String Function"),
-      ),
-      body: Obx(()=> SingleChildScrollView(
-        child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 10),
-          margin: const EdgeInsets.symmetric(vertical: 12),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              _textFieldData(controller: _strController.s1Controller),
-              const SizedBox(
-                height: 15,
-              ),
-              Text(
-                "Result : ${_strController.outputResult.value}",
-                style: const TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black),
-              ),
-              const SizedBox(
-                height: 15,
-              ),
-              _containerData(
-                  text: "Comma Separate",
-                  onTap: () {
-                    _strController.commaSeparate();
-                  }),
-              _containerData(
-                  text: "Real Input",
-                  onTap: () {
-                    _strController.realInput();
-                  }),
-              _containerData(
-                  text: "First Five Char",
-                  onTap: () {
-                    _strController.firstChar();
-                  }),
-              _containerData(
-                  text: "Last Five Char",
-                  onTap: () {
-                    _strController.lastChar();
-                  }),
-              Visibility(
-                  visible: _strController.isVisible.value,
-                  child: _textFieldData(controller: _strController.s2Controller)),
-              _containerData(
-                  text: "Add 2 String",
-                  onTap: () {
-                    _strController.addString();
-                  }),
-            ],
-          ),
+        appBar: AppBar(
+          backgroundColor: Colors.red[800],
+          title: const Text("String Function"),
         ),
-      ),)
-    );
+        body: Obx(
+          () => SingleChildScrollView(
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 10),
+              margin: const EdgeInsets.symmetric(vertical: 12),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _textFieldData(controller: controller.s1Controller),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  Text(
+                    "Result : ${controller.outputResult.value}",
+                    style: const TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black),
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  _containerData(
+                      text: "Comma Separate",
+                      onTap: () {
+                        controller.commaSeparate();
+                      }),
+                  _containerData(
+                      text: "Real Input",
+                      onTap: () {
+                        controller.realInput();
+                      }),
+                  _containerData(
+                      text: "First Five Char",
+                      onTap: () {
+                        controller.firstChar();
+                      }),
+                  _containerData(
+                      text: "Last Five Char",
+                      onTap: () {
+                        controller.lastChar();
+                      }),
+                  Visibility(
+                      visible: controller.isVisible.value,
+                      child:
+                          _textFieldData(controller: controller.s2Controller)),
+                  _containerData(
+                      text: "Add 2 String",
+                      onTap: () {
+                        controller.addString();
+                      }),
+                ],
+              ),
+            ),
+          ),
+        ));
   }
 
   Widget _textFieldData({TextEditingController? controller}) {

@@ -2,10 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:revisionproject/controller/evenodd_controller.dart';
 
-class EvenOddProfile extends StatelessWidget {
+class EvenOddProfile extends GetView<EvenOddController> {
   EvenOddProfile({super.key});
-
-  final _evenOddController = Get.put(EvenOddController());
 
   @override
   Widget build(BuildContext context) {
@@ -28,13 +26,11 @@ class EvenOddProfile extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      _textfielddata(
-                          controller: _evenOddController.num1Controller),
+                      _textfielddata(controller: controller.num1Controller),
                       const SizedBox(
                         width: 15,
                       ),
-                      _textfielddata(
-                          controller: _evenOddController.num2Controller),
+                      _textfielddata(controller: controller.num2Controller),
                     ],
                   ),
                   const SizedBox(
@@ -43,19 +39,17 @@ class EvenOddProfile extends StatelessWidget {
                   _containerData(
                       text: "Even",
                       onTab: () {
-                        _evenOddController.evenCheck(
-                            _evenOddController.num1Controller,
-                            _evenOddController.num2Controller);
+                        controller.evenCheck(controller.num1Controller,
+                            controller.num2Controller);
                       }),
                   _containerData(
                       text: "Odd",
                       onTab: () {
-                        _evenOddController.oddCheck(
-                            _evenOddController.num1Controller,
-                            _evenOddController.num2Controller);
+                        controller.oddCheck(controller.num1Controller,
+                            controller.num2Controller);
                       }),
                   Text(
-                    "RESULT : ${_evenOddController.outputResult.value}",
+                    "RESULT : ${controller.outputResult.value}",
                     style: const TextStyle(
                         fontSize: 17,
                         fontWeight: FontWeight.bold,

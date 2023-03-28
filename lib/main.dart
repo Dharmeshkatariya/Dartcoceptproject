@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:revisionproject/route/names_route.dart';
+import 'package:revisionproject/route/pageroute.dart';
 import 'package:revisionproject/screen/evenodd.dart';
 import 'package:revisionproject/screen/result.dart';
 import 'package:revisionproject/screen/string.dart';
 import 'package:revisionproject/screen/string2.dart';
-import 'screen/calculator.dart';
-import 'screen/calculator2.dart';
 import 'screen/gridview.dart';
 import 'screen/listview.dart';
 import 'screen/loginpage.dart';
@@ -26,6 +26,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: const MyHomePage(),
+      getPages: PageRoutes.pages,
     );
   }
 }
@@ -49,12 +50,12 @@ class MyHomePage extends StatelessWidget {
                 _getwidget(
                     text: "Even/Odd",
                     onTab: () {
-                      Get.to( EvenOddProfile());
+                      Get.toNamed(NameRoute.evenOddScreen);
                     }),
                 _getwidget(
                     text: "String",
                     onTab: () {
-                      Get.to( StrScreenPage());
+                      Get.toNamed(NameRoute.strScreenPage);
                     }),
                 _getwidget(
                     text: "Result",
@@ -64,7 +65,7 @@ class MyHomePage extends StatelessWidget {
                 _getwidget(
                     text: "Calculator",
                     onTab: () {
-                      Get.to(const CalculatorPage());
+                     Get.toNamed(NameRoute.calculatorScreen);
                     }),
                 _getwidget(
                     text: "Listview",
@@ -84,12 +85,12 @@ class MyHomePage extends StatelessWidget {
                 _getwidget(
                     text: "String 2",
                     onTab: () {
-                      Get.to(const SecondString());
+                      Get.toNamed(NameRoute.secondString);
                     }),
                 _getwidget(
                     text: "Calculator 2",
                     onTab: () {
-                      Get.to(const CalculatorApp());
+                      Get.toNamed(NameRoute.calculator2Screen);
                     }),
               ],
             ),

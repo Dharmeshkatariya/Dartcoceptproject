@@ -2,15 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:revisionproject/controller/result_controller.dart';
 
-class StudentResult extends StatefulWidget {
+class StudentResult extends GetView<ResultController> {
   const StudentResult({super.key});
-
-  @override
-  State<StudentResult> createState() => _StudentResultState();
-}
-
-class _StudentResultState extends State<StudentResult> {
-  final _resultController = Get.put(ResultController());
 
   @override
   Widget build(BuildContext context) {
@@ -108,12 +101,9 @@ class _StudentResultState extends State<StudentResult> {
                   Expanded(
                     child: Column(
                       children: [
-                        _textFieldData(
-                            controller: _resultController.mathController),
-                        _textFieldData(
-                            controller: _resultController.chemController),
-                        _textFieldData(
-                            controller: _resultController.phyController),
+                        _textFieldData(controller: controller.mathController),
+                        _textFieldData(controller: controller.chemController),
+                        _textFieldData(controller: controller.phyController),
                       ],
                     ),
                   )
@@ -121,36 +111,32 @@ class _StudentResultState extends State<StudentResult> {
               ),
               _text(
                   text:
-                      "Result :- ${_resultController.isPass.value ? 'pass' : 'fail'}",
-                  color: _resultController.isPass.value
-                      ? Colors.blueAccent
-                      : Colors.red),
+                      "Result :- ${controller.isPass.value ? 'pass' : 'fail'}",
+                  color:
+                      controller.isPass.value ? Colors.blueAccent : Colors.red),
               const SizedBox(
                 height: 25,
               ),
-              _text(text: "Grade :- ${_resultController.grade.value}"),
+              _text(text: "Grade :- ${controller.grade.value}"),
               const SizedBox(
                 height: 25,
               ),
-              _text(text: "Perchantage :- ${_resultController.avg.value}%"),
+              _text(text: "Perchantage :- ${controller.avg.value}%"),
               const SizedBox(
                 height: 25,
               ),
               _text(
-                  text: _resultController.isPass.value
-                      ? 'congratulation'
-                      : 'sorry',
-                  color: _resultController.isPass.value
-                      ? Colors.blueAccent
-                      : Colors.red),
+                  text: controller.isPass.value ? 'congratulation' : 'sorry',
+                  color:
+                      controller.isPass.value ? Colors.blueAccent : Colors.red),
               const SizedBox(
                 height: 25,
               ),
               GestureDetector(
                 onTap: () {
-                  _resultController.average();
-                  _resultController.passing();
-                  _resultController.grading();
+                  controller.average();
+                  controller.passing();
+                  controller.grading();
                 },
                 child: Container(
                   alignment: Alignment.center,

@@ -1,17 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:revisionproject/common.dart';
 import 'package:revisionproject/controller/calculator_controller.dart';
 
-class CalculatorPage extends StatefulWidget {
-  const CalculatorPage({super.key});
-
-  @override
-  State<CalculatorPage> createState() => _CalculatorPageState();
-}
-
-class _CalculatorPageState extends State<CalculatorPage> {
-  final _calController = Get.put(CalculatorController());
+class CalculatorPage extends GetView<CalculatorController> {
+  const  CalculatorPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +17,7 @@ class _CalculatorPageState extends State<CalculatorPage> {
               padding: const EdgeInsets.all(12),
               color: Colors.blueGrey,
               child: Text(
-                _calController.outputResult.value,
+                controller.outputResult.value,
                 style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 45,
@@ -61,25 +53,25 @@ class _CalculatorPageState extends State<CalculatorPage> {
         _containerData(
             text: "0",
             onTap: () {
-              _calController.numberPress("0");
-              _calController.separate();
+              controller.numberPress("0");
+              controller.separate();
             }),
         _containerData(
             text: ".",
             onTap: () {
-              _calController.numberPress(".");
+              controller.numberPress(".");
             }),
         _containerData(
             text: "=",
             color: Colors.teal,
             onTap: () {
-              _calController.separate();
+              controller.separate();
             }),
         _containerData(
             text: "+",
             color: Colors.orange.shade400,
             onTap: () {
-              _calController.numberPress("+");
+              controller.numberPress("+");
             }),
       ],
     );
@@ -91,23 +83,23 @@ class _CalculatorPageState extends State<CalculatorPage> {
         _containerData(
             text: "1",
             onTap: () {
-              _calController.numberPress("1");
+              controller.numberPress("1");
             }),
         _containerData(
             text: "2",
             onTap: () {
-              _calController.numberPress("2");
+              controller.numberPress("2");
             }),
         _containerData(
             text: "3",
             onTap: () {
-              _calController.numberPress("3");
+              controller.numberPress("3");
             }),
         _containerData(
             text: "-",
             color: Colors.orange.shade400,
             onTap: () {
-              _calController.numberPress("-");
+              controller.numberPress("-");
             }),
       ],
     );
@@ -119,23 +111,23 @@ class _CalculatorPageState extends State<CalculatorPage> {
         _containerData(
             text: "4",
             onTap: () {
-              _calController.numberPress("4");
+              controller.numberPress("4");
             }),
         _containerData(
             text: "5",
             onTap: () {
-              _calController.numberPress("5");
+              controller.numberPress("5");
             }),
         _containerData(
             text: "6",
             onTap: () {
-              _calController.numberPress("6");
+              controller.numberPress("6");
             }),
         _containerData(
             text: "*",
             color: Colors.orange.shade400,
             onTap: () {
-              _calController.numberPress("*");
+              controller.numberPress("*");
             }),
       ],
     );
@@ -147,23 +139,23 @@ class _CalculatorPageState extends State<CalculatorPage> {
         _containerData(
             text: "7",
             onTap: () {
-              _calController.numberPress("7");
+              controller.numberPress("7");
             }),
         _containerData(
             text: "8",
             onTap: () {
-              _calController.numberPress("8");
+              controller.numberPress("8");
             }),
         _containerData(
             text: "9",
             onTap: () {
-              _calController.numberPress("9");
+              controller.numberPress("9");
             }),
         _containerData(
             text: "/",
             color: Colors.orange.shade400,
             onTap: () {
-              _calController.numberPress("/");
+              controller.numberPress("/");
             }),
       ],
     );
@@ -176,18 +168,18 @@ class _CalculatorPageState extends State<CalculatorPage> {
             text: "Ac",
             color: Colors.red,
             onTap: () {
-              _calController.outputResult.value = "0";
+              controller.outputResult.value = "0";
             }),
         _containerData(
             text: "C",
             color: Colors.orange.shade400,
             onTap: () {
-              _calController.clearPress();
+              controller.clearPress();
             }),
         _containerData(
             text: "%",
             onTap: () {
-              _calController.numberPress("%");
+              controller.numberPress("%");
             }),
         _containerData(text: "", color: Colors.orange.shade400),
       ],
